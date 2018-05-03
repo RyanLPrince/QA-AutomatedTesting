@@ -3,8 +3,10 @@ package com.qa.mouseAction;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 
 import com.qa.constants.Constants;
+import com.qa.page.DraggablePage;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -12,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 
 public class ActionsTest {
 
@@ -26,9 +29,19 @@ public class ActionsTest {
 		action=new Actions(driver);
 		driver.get("http://demoqa.com/");
 		driver.manage().window().maximize();
-		action=new Actions(driver);
+	
+		
 	}
 	
+	@Test
+	public void draggablePageTest() throws InterruptedException {
+		driver.findElement(By.id("menu-item-140")).click();
+		DraggablePage page = PageFactory.initElements(driver, DraggablePage.class);
+		page.drag(100,100,action);
+		driver.close();
+	}
+	
+	@Ignore
 	@Test
 	public void drag() throws InterruptedException {
 		driver.findElement(By.id("menu-item-140")).click();
